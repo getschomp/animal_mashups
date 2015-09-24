@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 20150919174309) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "table_animals", force: :cascade do |t|
-    t.string  "common_name"
+  create_table "animals", force: :cascade do |t|
+    t.string  "name"
     t.integer "taxon_id"
   end
 

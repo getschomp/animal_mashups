@@ -1,7 +1,7 @@
 class CreateAnimals < ActiveRecord::Migration
   def change
-    create_table :table_animals do |t|
-      t.string :common_name
+    create_table :animals do |t|
+      t.string :name
       t.integer :taxon_id
       # only seed animals that have images/notes
     end
