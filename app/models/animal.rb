@@ -14,7 +14,7 @@ class Animal < ActiveRecord::Base
     response = WildlifeApiRequest.new(:animal_classes).response
     animal_classes = JSON.parse(response.response_body)
     animal_classes['Class'].each do |animal_class|
-      make_families(animal_class['ClassName'] )
+      get_families(animal_class['ClassName'] )
     end
   end
 
@@ -23,7 +23,7 @@ class Animal < ActiveRecord::Base
     request.animal_class = animal_class
     response = JSON.parse(request.response.response_body)
     response['Family'].each do |family|
-      make_animal(family)
+      seed_animal(family)
     end
   end
 
@@ -33,11 +33,10 @@ class Animal < ActiveRecord::Base
     response = JSON.parse(request.response.response_body)
     if response['Species']
       puts response['Species']
-      binding.pry
       response['Species'][0]['AcceptedCommonName']
       name = response['Species'][0]['AcceptedCommonName']
       taxon_id = response['Species'][0]['TaxonID']
-      Animal.find_or_create_by(name: name, taxon_id: taxon_id)
+      Animal.find_or_create_by(name: name, taxon_id: taxon_id) if name
     end
   end
 
